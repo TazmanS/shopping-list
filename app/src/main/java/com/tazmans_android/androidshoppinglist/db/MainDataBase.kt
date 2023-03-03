@@ -14,6 +14,9 @@ import com.tazmans_android.androidshoppinglist.entities.ShoppingListNames
     version = 1
 )
 abstract class MainDataBase : RoomDatabase() {
+
+    abstract fun getDao(): Dao
+
     companion object {
         @Volatile
         private var INSTANCE: MainDataBase? = null
