@@ -1,7 +1,8 @@
-package com.tazmans_android.androidshoppinglist
+package com.tazmans_android.androidshoppinglist.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.tazmans_android.androidshoppinglist.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
