@@ -12,12 +12,10 @@ import com.tazmans_android.androidshoppinglist.entities.NoteItem
 
 class NoteAdapter : ListAdapter<NoteItem, NoteAdapter.ItemHolder>(ItemComparator()) {
 
-    // создание разметки(пустой)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         return ItemHolder.create(parent) // создаем класс который содержит разметку
     }
 
-    // наполнение разметки holder это ItemHolder.setData
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         holder.setData(getItem(position))
     }
