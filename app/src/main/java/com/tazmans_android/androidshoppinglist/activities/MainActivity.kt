@@ -26,7 +26,9 @@ class MainActivity : AppCompatActivity() {
                     FragmentManager.setFragment(NoteFragment.newInstance(), this)
                 }
                 R.id.shop_list -> {}
-                R.id.new_item -> {}
+                R.id.new_item -> {
+                    FragmentManager.currentFrag?.onClickNew()
+                }
             }
             true
         }
