@@ -8,7 +8,10 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.tazmans_android.androidshoppinglist.R
 import com.tazmans_android.androidshoppinglist.databinding.ActivityNewNoteBinding
+import com.tazmans_android.androidshoppinglist.entities.NoteItem
 import com.tazmans_android.androidshoppinglist.fragments.NoteFragment
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NewNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewNoteBinding
@@ -35,11 +38,25 @@ class NewNoteActivity : AppCompatActivity() {
 
     private fun setMyResult() {
         val i = Intent().apply {
-            putExtra(NoteFragment.TITLE_KEY, binding.edTitle.text.toString())
-            putExtra(NoteFragment.DESC_KEY, binding.edDescription.text.toString())
+            putExtra(NoteFragment.NEW_NOTE_KEY, createNewNote())
         }
         setResult(Activity.RESULT_OK, i)
         finish()
+    }
+
+    private fun createNewNote(): NoteItem {
+        return NoteItem(
+            null,
+            binding.edTitle.text.toString(),
+            binding.edDescription.text.toString(),
+            getCurrentTime(),
+            ""
+        )
+    }
+
+    private fun getCurrentTime(): String {
+        val formatter = SimpleDateFormat("hh:mm:ss - yyyy/MM/dd", Locale.getDefault())
+        return formatter.format(Calendar.getInstance().time)
     }
 
     private fun actionBarSettings() {

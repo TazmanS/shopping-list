@@ -13,7 +13,7 @@ import com.tazmans_android.androidshoppinglist.entities.NoteItem
 class NoteAdapter : ListAdapter<NoteItem, NoteAdapter.ItemHolder>(ItemComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
-        return ItemHolder.create(parent) // создаем класс который содержит разметку
+        return ItemHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
