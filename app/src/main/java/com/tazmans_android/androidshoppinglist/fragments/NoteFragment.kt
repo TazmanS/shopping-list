@@ -17,7 +17,7 @@ import com.tazmans_android.androidshoppinglist.db.MainViewModel
 import com.tazmans_android.androidshoppinglist.db.NoteAdapter
 import com.tazmans_android.androidshoppinglist.entities.NoteItem
 
-class NoteFragment : BaseFragment() {
+class NoteFragment : BaseFragment(), NoteAdapter.Listener {
     private lateinit var binding: FragmentNoteBinding
     private lateinit var editLauncher: ActivityResultLauncher<Intent>
     private lateinit var adapter: NoteAdapter
@@ -51,7 +51,7 @@ class NoteFragment : BaseFragment() {
 
     private fun initRcView() = with(binding) {
         rcViewNote.layoutManager = LinearLayoutManager(activity)
-        adapter = NoteAdapter()
+        adapter = NoteAdapter(this@NoteFragment)
         rcViewNote.adapter = adapter
     }
 
@@ -74,5 +74,9 @@ class NoteFragment : BaseFragment() {
 
         @JvmStatic
         fun newInstance() = NoteFragment()
+    }
+
+    override fun deleteItem(id: Int) {
+        mainViewModel.deleteNote(id)
     }
 }

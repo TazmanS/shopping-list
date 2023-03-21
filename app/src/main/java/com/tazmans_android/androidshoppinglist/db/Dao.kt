@@ -16,4 +16,7 @@ interface Dao {
 
     @Insert
     suspend fun insertNote(note: NoteItem)
+
+    @Query("DELETE FROM note_list WHERE id IS :id")
+    suspend fun deleteNote(id: Int)
 }
