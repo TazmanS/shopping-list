@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Spannable
+import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.view.Menu
 import android.view.MenuItem
@@ -13,6 +14,7 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.tazmans_android.androidshoppinglist.R
 import com.tazmans_android.androidshoppinglist.databinding.ActivityNewNoteBinding
 import com.tazmans_android.androidshoppinglist.entities.NoteItem
@@ -33,6 +35,28 @@ class NewNoteActivity : AppCompatActivity() {
         actionBarSettings()
         getNote()
         init()
+        onClickColorPicker()
+    }
+
+    private fun onClickColorPicker() = with(binding) {
+        imRed.setOnClickListener {
+            setColorForSelectedText(R.color.picker_red)
+        }
+        imBlack.setOnClickListener {
+            setColorForSelectedText(R.color.picker_black)
+        }
+        imBlue.setOnClickListener {
+            setColorForSelectedText(R.color.picker_blue)
+        }
+        imGreen.setOnClickListener {
+            setColorForSelectedText(R.color.picker_green)
+        }
+        imOrange.setOnClickListener {
+            setColorForSelectedText(R.color.picker_orange)
+        }
+        imYellow.setOnClickListener {
+            setColorForSelectedText(R.color.picker_yellow)
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -92,6 +116,23 @@ class NewNoteActivity : AppCompatActivity() {
         edDescription.setSelection(startPos)
     }
 
+    private fun setColorForSelectedText(colorId: Int) = with(binding) {
+        val startPos = edDescription.selectionStart
+        val endPos = edDescription.selectionEnd
+
+        val styles = edDescription.text.getSpans(startPos, endPos, ForegroundColorSpan::class.java)
+        if (styles.isNotEmpty()) edDescription.text.removeSpan(styles[0])
+
+        edDescription.text.setSpan(
+            ForegroundColorSpan(ContextCompat.getColor(this@NewNoteActivity, colorId)),
+            startPos,
+            endPos,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        edDescription.text.trim()
+        edDescription.setSelection(startPos)
+    }
+
     private fun setMyResult() {
         var editState = "new"
         val tempNote: NoteItem?
@@ -145,18 +186,12 @@ class NewNoteActivity : AppCompatActivity() {
     private fun closeColorPicker() {
         val openAnim = AnimationUtils.loadAnimation(this, R.anim.close_color_picker)
         openAnim.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation?) {
-
-            }
-
+            override fun onAnimationStart(animation: Animation?) {}
             override fun onAnimationEnd(animation: Animation?) {
                 binding.colorPicker.visibility = View.GONE
             }
 
-            override fun onAnimationRepeat(animation: Animation?) {
-
-            }
-
+            override fun onAnimationRepeat(animation: Animation?) {}
         })
         binding.colorPicker.startAnimation(openAnim)
     }
