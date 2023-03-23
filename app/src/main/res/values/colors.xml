@@ -8,4 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="green_main">#42F456</color>
+
+    <color name="picker_red">#FA1100</color>
+    <color name="picker_green">#42F456</color>
+    <color name="picker_blue">#3F51B5</color>
+    <color name="picker_black">#393939</color>
+    <color name="picker_yellow">#FFEB3B</color>
+    <color name="picker_orange">#FF9800</color>
 </resources>
