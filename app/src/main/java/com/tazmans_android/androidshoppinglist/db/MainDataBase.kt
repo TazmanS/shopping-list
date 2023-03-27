@@ -7,10 +7,10 @@ import androidx.room.RoomDatabase
 import com.tazmans_android.androidshoppinglist.entities.LibraryItem
 import com.tazmans_android.androidshoppinglist.entities.NoteItem
 import com.tazmans_android.androidshoppinglist.entities.ShoppingListItem
-import com.tazmans_android.androidshoppinglist.entities.ShoppingListNames
+import com.tazmans_android.androidshoppinglist.entities.ShoppingListName
 
 @Database(
-    entities = [LibraryItem::class, NoteItem::class, ShoppingListItem::class, ShoppingListNames::class],
+    entities = [LibraryItem::class, NoteItem::class, ShoppingListItem::class, ShoppingListName::class],
     version = 1
 )
 abstract class MainDataBase : RoomDatabase() {

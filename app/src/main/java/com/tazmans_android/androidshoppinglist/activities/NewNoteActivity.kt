@@ -22,7 +22,7 @@ import com.tazmans_android.androidshoppinglist.entities.NoteItem
 import com.tazmans_android.androidshoppinglist.fragments.NoteFragment
 import com.tazmans_android.androidshoppinglist.utils.HtmlManager
 import com.tazmans_android.androidshoppinglist.utils.MyTouchListener
-import java.text.SimpleDateFormat
+import com.tazmans_android.androidshoppinglist.utils.TimeManager
 import java.util.*
 
 class NewNoteActivity : AppCompatActivity() {
@@ -164,14 +164,9 @@ class NewNoteActivity : AppCompatActivity() {
             null,
             binding.edTitle.text.toString(),
             HtmlManager.toHtml(binding.edDescription.text),
-            getCurrentTime(),
+            TimeManager.getCurrentTime(),
             ""
         )
-    }
-
-    private fun getCurrentTime(): String {
-        val formatter = SimpleDateFormat("hh:mm:ss - yyyy/MM/dd", Locale.getDefault())
-        return formatter.format(Calendar.getInstance().time)
     }
 
     private fun actionBarSettings() {

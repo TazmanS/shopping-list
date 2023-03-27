@@ -1,7 +1,6 @@
 package com.tazmans_android.androidshoppinglist.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,8 @@ import com.tazmans_android.androidshoppinglist.activities.MainApp
 import com.tazmans_android.androidshoppinglist.databinding.FragmentShopListNamesBinding
 import com.tazmans_android.androidshoppinglist.db.MainViewModel
 import com.tazmans_android.androidshoppinglist.dialogs.NewListDialog
+import com.tazmans_android.androidshoppinglist.entities.ShoppingListName
+import com.tazmans_android.androidshoppinglist.utils.TimeManager
 
 class ShopListNamesFragment : BaseFragment() {
     private lateinit var binding: FragmentShopListNamesBinding
@@ -22,7 +23,15 @@ class ShopListNamesFragment : BaseFragment() {
     override fun onClickNew() {
         NewListDialog.showDialog(activity as AppCompatActivity, object : NewListDialog.Listener {
             override fun onClick(name: String) {
-                Log.v("MyTag", name)
+                val shopListName = ShoppingListName(
+                    null,
+                    name,
+                    TimeManager.getCurrentTime(),
+                    0,
+                    0,
+                    ""
+                )
+                mainViewModel.insertShopListName(shopListName)
             }
         })
     }
@@ -50,8 +59,8 @@ class ShopListNamesFragment : BaseFragment() {
     }
 
     private fun observer() {
-        mainViewModel.allNotes.observe(viewLifecycleOwner, {
-
+        mainViewModel.allShopListNames.observe(viewLifecycleOwner, {
+            
         })
     }
 
