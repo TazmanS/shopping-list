@@ -1,22 +1,21 @@
 package com.tazmans_android.androidshoppinglist.activities
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.tazmans_android.androidshoppinglist.R
 import com.tazmans_android.androidshoppinglist.databinding.ActivityMainBinding
-import com.tazmans_android.androidshoppinglist.dialogs.NewListDialog
 import com.tazmans_android.androidshoppinglist.fragments.FragmentManager
 import com.tazmans_android.androidshoppinglist.fragments.NoteFragment
+import com.tazmans_android.androidshoppinglist.fragments.ShopListNamesFragment
 
-class MainActivity : AppCompatActivity(), NewListDialog.Listener {
+class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        FragmentManager.setFragment(ShopListNamesFragment.newInstance(), this)
         setBottomNavListener()
     }
 
@@ -27,17 +26,14 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
                 R.id.notes -> {
                     FragmentManager.setFragment(NoteFragment.newInstance(), this)
                 }
-                R.id.shop_list -> {}
+                R.id.shop_list -> {
+                    FragmentManager.setFragment(ShopListNamesFragment.newInstance(), this)
+                }
                 R.id.new_item -> {
-//                    FragmentManager.currentFrag?.onClickNew()
-                    NewListDialog.showDialog(this, this)
+                    FragmentManager.currentFrag?.onClickNew()
                 }
             }
             true
         }
-    }
-
-    override fun onClick(name: String) {
-        Log.v("MyTag", name)
     }
 }
