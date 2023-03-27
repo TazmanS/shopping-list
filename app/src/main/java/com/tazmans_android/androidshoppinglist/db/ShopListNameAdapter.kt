@@ -11,7 +11,7 @@ import com.tazmans_android.androidshoppinglist.databinding.ListNameItemBinding
 import com.tazmans_android.androidshoppinglist.entities.NoteItem
 import com.tazmans_android.androidshoppinglist.entities.ShoppingListName
 
-class ShopListNameAdapter() :
+class ShopListNameAdapter(private val listener: Listener) :
     ListAdapter<ShoppingListName, ShopListNameAdapter.ItemHolder>(ItemComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
@@ -19,12 +19,12 @@ class ShopListNameAdapter() :
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        holder.setData(getItem(position))
+        holder.setData(getItem(position), listener)
     }
 
     class ItemHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ListNameItemBinding.bind(view)
-        fun setData(shopListNameItem: ShoppingListName) = with(binding) {
+        fun setData(shopListNameItem: ShoppingListName, listener: Listener) = with(binding) {
             tvListName.text = shopListNameItem.name
             tvTime.text = shopListNameItem.time
 
@@ -32,7 +32,7 @@ class ShopListNameAdapter() :
 
             }
             imDelete.setOnClickListener {
-
+                listener.deleteItem(shopListNameItem.id!!)
             }
 
         }

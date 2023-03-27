@@ -11,11 +11,13 @@ import com.tazmans_android.androidshoppinglist.activities.MainApp
 import com.tazmans_android.androidshoppinglist.databinding.FragmentShopListNamesBinding
 import com.tazmans_android.androidshoppinglist.db.MainViewModel
 import com.tazmans_android.androidshoppinglist.db.ShopListNameAdapter
+import com.tazmans_android.androidshoppinglist.dialogs.DeleteDialog
 import com.tazmans_android.androidshoppinglist.dialogs.NewListDialog
+import com.tazmans_android.androidshoppinglist.entities.NoteItem
 import com.tazmans_android.androidshoppinglist.entities.ShoppingListName
 import com.tazmans_android.androidshoppinglist.utils.TimeManager
 
-class ShopListNamesFragment : BaseFragment() {
+class ShopListNamesFragment : BaseFragment(), ShopListNameAdapter.Listener {
     private lateinit var binding: FragmentShopListNamesBinding
     private lateinit var adapter: ShopListNameAdapter
 
@@ -59,7 +61,7 @@ class ShopListNamesFragment : BaseFragment() {
 
     private fun initRcView() = with(binding) {
         rcView.layoutManager = LinearLayoutManager(activity)
-        adapter = ShopListNameAdapter()
+        adapter = ShopListNameAdapter(this@ShopListNamesFragment)
         rcView.adapter = adapter
     }
 
@@ -72,5 +74,17 @@ class ShopListNamesFragment : BaseFragment() {
     companion object {
         @JvmStatic
         fun newInstance() = ShopListNamesFragment()
+    }
+
+    override fun deleteItem(id: Int) =
+        DeleteDialog.showDialog(context as AppCompatActivity, object : DeleteDialog.Listener {
+            override fun onClick() {
+                mainViewModel.deleteShopListName(id)
+            }
+
+        })
+
+    override fun onClickItem(note: NoteItem) {
+        TODO("Not yet implemented")
     }
 }

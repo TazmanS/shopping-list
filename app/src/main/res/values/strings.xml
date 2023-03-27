@@ -10,6 +10,9 @@
     <string name="description_hint">Description</string>
     <string name="new_list_name">New List name</string>
     <string name="create_list">Create List</string>
+    <string name="do_you_want_delete_this_item">Do you want delete this item?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
 
 
 </resources>
