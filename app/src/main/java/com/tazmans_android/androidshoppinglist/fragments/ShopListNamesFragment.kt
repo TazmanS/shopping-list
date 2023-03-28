@@ -13,7 +13,6 @@ import com.tazmans_android.androidshoppinglist.db.MainViewModel
 import com.tazmans_android.androidshoppinglist.db.ShopListNameAdapter
 import com.tazmans_android.androidshoppinglist.dialogs.DeleteDialog
 import com.tazmans_android.androidshoppinglist.dialogs.NewListDialog
-import com.tazmans_android.androidshoppinglist.entities.NoteItem
 import com.tazmans_android.androidshoppinglist.entities.ShoppingListName
 import com.tazmans_android.androidshoppinglist.utils.TimeManager
 
@@ -38,7 +37,7 @@ class ShopListNamesFragment : BaseFragment(), ShopListNameAdapter.Listener {
                 )
                 mainViewModel.insertShopListName(shopListName)
             }
-        })
+        }, "")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,7 +83,15 @@ class ShopListNamesFragment : BaseFragment(), ShopListNameAdapter.Listener {
 
         })
 
-    override fun onClickItem(note: NoteItem) {
+    override fun editItem(shopListName: ShoppingListName) {
+        NewListDialog.showDialog(activity as AppCompatActivity, object : NewListDialog.Listener {
+            override fun onClick(name: String) {
+                mainViewModel.updateListName(shopListName.copy(name = name))
+            }
+        }, shopListName.name)
+    }
+
+    override fun onClickItem(shopListName: ShoppingListName) {
         TODO("Not yet implemented")
     }
 }
