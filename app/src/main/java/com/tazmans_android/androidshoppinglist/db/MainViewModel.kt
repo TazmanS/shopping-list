@@ -2,13 +2,13 @@ package com.tazmans_android.androidshoppinglist.db
 
 import androidx.lifecycle.*
 import com.tazmans_android.androidshoppinglist.entities.NoteItem
-import com.tazmans_android.androidshoppinglist.entities.ShoppingListName
+import com.tazmans_android.androidshoppinglist.entities.ShopListNameItem
 import kotlinx.coroutines.launch
 
 class MainViewModel(dataBase: MainDataBase) : ViewModel() {
     val dao = dataBase.getDao()
     val allNotes: LiveData<List<NoteItem>> = dao.getAllNotes().asLiveData()
-    val allShopListNames: LiveData<List<ShoppingListName>> = dao.getAllShopListNames().asLiveData()
+    val allShopListNames: LiveData<List<ShopListNameItem>> = dao.getAllShopListNames().asLiveData()
 
     fun insertNote(note: NoteItem) = viewModelScope.launch {
         dao.insertNote(note)
@@ -22,7 +22,7 @@ class MainViewModel(dataBase: MainDataBase) : ViewModel() {
         dao.deleteNote(id)
     }
 
-    fun insertShopListName(listName: ShoppingListName) = viewModelScope.launch {
+    fun insertShopListName(listName: ShopListNameItem) = viewModelScope.launch {
         dao.insertShopListName(listName)
     }
 
@@ -30,7 +30,7 @@ class MainViewModel(dataBase: MainDataBase) : ViewModel() {
         dao.deleteShopListName(id)
     }
 
-    fun updateListName(shopListName: ShoppingListName) = viewModelScope.launch {
+    fun updateListName(shopListName: ShopListNameItem) = viewModelScope.launch {
         dao.updateListName(shopListName)
     }
 
