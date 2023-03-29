@@ -1,8 +1,10 @@
 package com.tazmans_android.androidshoppinglist.activities
 
 import android.os.Bundle
+import android.view.Menu
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.tazmans_android.androidshoppinglist.R
 import com.tazmans_android.androidshoppinglist.databinding.ActivityShopListBinding
 import com.tazmans_android.androidshoppinglist.db.MainViewModel
 import com.tazmans_android.androidshoppinglist.entities.ShopListNameItem
@@ -19,6 +21,11 @@ class ShopListActivity : AppCompatActivity() {
         binding = ActivityShopListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.shop_list_menu, menu)
+        return true
     }
 
     private fun init() {

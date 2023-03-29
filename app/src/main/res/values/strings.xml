@@ -14,6 +14,9 @@
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
     <string name="update">Update</string>
+    <string name="delete_list">Delete list</string>
+    <string name="clear_list">Clear list</string>
+    <string name="share_list">Share list</string>
 
 
 </resources>
