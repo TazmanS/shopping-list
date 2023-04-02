@@ -26,7 +26,7 @@ class ShopListItemAdapter(private val listener: Listener) :
             holder.setItemData(getItem(position), listener)
         else
             holder.setLibraryData(getItem(position), listener)
-        
+
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -48,14 +48,14 @@ class ShopListItemAdapter(private val listener: Listener) :
             fun createShopItem(parent: ViewGroup): ItemHolder {
                 return ItemHolder(
                     LayoutInflater.from(parent.context)
-                        .inflate(R.layout.list_name_item, parent, false)
+                        .inflate(R.layout.shop_list_item, parent, false)
                 )
             }
 
             fun createLibraryItem(parent: ViewGroup): ItemHolder {
                 return ItemHolder(
                     LayoutInflater.from(parent.context)
-                        .inflate(R.layout.list_name_item, parent, false)
+                        .inflate(R.layout.shop_library_list_item, parent, false)
                 )
             }
         }
